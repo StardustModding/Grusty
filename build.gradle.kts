@@ -42,7 +42,7 @@ gradlePlugin {
             implementationClass = "org.stardustmodding.grusty.plugin.GrustyPlugin"
             version = "0.1.0"
             description = "A simple Gradle plugin to help facilitate Rust/JNI-based libraries."
-            displayName = "Grusty"
+            displayName = "grusty"
 
             tags.set(listOf("rust", "gradle", "grusty"))
         }
