@@ -9,7 +9,7 @@ A simple Gradle plugin to help facilitate Rust/JNI-based libraries.
 
 pluginManagement {
     repositories {
-        maven("https://maven.stardustmodding.org/snapshots")
+        maven("https://maven.stardustmodding.org/public-snapshots")
     }
 }
 
