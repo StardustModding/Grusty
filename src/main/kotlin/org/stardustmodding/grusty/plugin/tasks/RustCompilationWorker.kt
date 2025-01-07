@@ -34,7 +34,7 @@ abstract class RustCompilationWorker : WorkAction<RustCompilationParams> {
             .redirectOutput(ProcessBuilder.Redirect.PIPE)
             .redirectError(ProcessBuilder.Redirect.PIPE)
 
-        if ("-pc-" in parameters.target.getOrElse("" to "").first) {
+        if ("-pc-" in parameters.target.getOrElse("" to "").first && parameters.projectDir.get().resolve("rust").resolve("exports.def").exists()) {
             val file = parameters.projectDir.get().resolve("rust").resolve("exports.def").absolutePath
 
             builder.environment()["RUSTFLAGS"] = "-C link-arg=${file}"

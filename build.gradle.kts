@@ -40,7 +40,7 @@ gradlePlugin {
         create("org.stardustmodding.grusty") {
             id = "org.stardustmodding.grusty"
             implementationClass = "org.stardustmodding.grusty.plugin.GrustyPlugin"
-            version = "0.1.0"
+            version = project.version
             description = "A simple Gradle plugin to help facilitate Rust/JNI-based libraries."
             displayName = "grusty"
 

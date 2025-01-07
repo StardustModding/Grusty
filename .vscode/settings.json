@@ -1,0 +1,7 @@
+{
+    "rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
+    "java.jdt.ls.java.home": "/usr/local/sdkman/candidates/java/current",
+    "java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current",
+    "kotlin.java.home": "/usr/local/sdkman/candidates/java/current",
+    "java.configuration.updateBuildConfiguration": "automatic"
+}
