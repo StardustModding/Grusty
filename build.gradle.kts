@@ -54,7 +54,7 @@ publishing {
         repositories {
             maven {
                 name = "StardustModding"
-                url = uri("https://maven.stardustmodding.org/snapshots")
+                url = uri("https://maven.stardustmodding.org/public-snapshots")
 
                 credentials {
                     username = System.getenv("MAVEN_USER")
