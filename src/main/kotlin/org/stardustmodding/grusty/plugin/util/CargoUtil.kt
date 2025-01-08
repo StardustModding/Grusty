@@ -32,6 +32,12 @@ object CargoUtil {
         val bin = res.resolve(getPrefix(target.first) + getPackageName(projectDir) + getExt(target.first)).toFile()
 
         getBinaryPath(projectDir, mode, target.first)?.copyTo(bin, true)
+
+        if (mode == RustCompilationMode.Debug) {
+            val dbg = res.resolve(getPrefix(target.first) + getPackageName(projectDir) + getDebugExt(target.first)).toFile()
+
+            getDebugSymbolsPath(projectDir, mode, target.first)?.copyTo(dbg, true)
+        }
     }
 
     private fun copyToTargetInner(projectDir: Path, mode: RustCompilationMode) {
@@ -48,6 +54,12 @@ object CargoUtil {
         val bin = res.resolve(getHostPrefix() + getPackageName(projectDir) + getHostExt()).toFile()
 
         getBinaryPath(projectDir, mode)?.copyTo(bin, true)
+
+        if (mode == RustCompilationMode.Debug) {
+            val dbg = res.resolve(getHostPrefix() + getPackageName(projectDir) + getHostDebugExt()).toFile()
+
+            getDebugSymbolsPath(projectDir, mode)?.copyTo(dbg, true)
+        }
     }
 
     private fun getBinaryPath(projectDir: Path, mode: RustCompilationMode, target: String): File? {
@@ -60,12 +72,31 @@ object CargoUtil {
             .toFile()
     }
 
+    private fun getDebugSymbolsPath(projectDir: Path, mode: RustCompilationMode, target: String): File? {
+        return projectDir
+            .resolve("rust")
+            .resolve("target")
+            .resolve(target)
+            .resolve(mode.toString())
+            .resolve(getPrefix(target) + getPackageName(projectDir) + getDebugExt(target))
+            .toFile()
+    }
+
     private fun getBinaryPath(projectDir: Path, mode: RustCompilationMode): File? {
         return projectDir
             .resolve("rust")
             .resolve("target")
             .resolve(mode.toString())
             .resolve(getHostPrefix() + getPackageName(projectDir) + getHostExt())
+            .toFile()
+    }
+
+    private fun getDebugSymbolsPath(projectDir: Path, mode: RustCompilationMode): File? {
+        return projectDir
+            .resolve("rust")
+            .resolve("target")
+            .resolve(mode.toString())
+            .resolve(getHostPrefix() + getPackageName(projectDir) + getHostDebugExt())
             .toFile()
     }
 
@@ -111,6 +142,10 @@ object CargoUtil {
         return ".so"
     }
 
+    private fun getDebugExt(target: String): String {
+        return ".pdb"
+    }
+
     private fun getHostExt(): String {
         val platform = System.getProperty("os.name").lowercase()
 
@@ -118,6 +153,10 @@ object CargoUtil {
         if ("mac" in platform) return ".dylib"
 
         return ".so"
+    }
+
+    private fun getHostDebugExt(): String {
+        return ".pdb"
     }
 
     @Serializable
